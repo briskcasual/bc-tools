@@ -1,3 +1,0 @@
-This is just a simple test of hexer
-
-This should be converted back.
