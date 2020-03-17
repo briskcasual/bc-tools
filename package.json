@@ -1,0 +1,26 @@
+{
+  "name": "bc-tools",
+  "version": "0.0.0",
+  "description": "tools for brisk casual",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin":{
+    "bc-hexer": "./bin/hexer/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/briskcasual/bc-tools.git"
+  },
+  "keywords": [
+    "tools",
+    "brisk"
+  ],
+  "author": "brisk casual",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/briskcasual/bc-tools/issues"
+  },
+  "homepage": "https://github.com/briskcasual/bc-tools#readme"
+}
