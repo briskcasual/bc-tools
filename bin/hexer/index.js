@@ -6,6 +6,7 @@ const fs = require('fs'),
 	  writeFile = promsify(fs.writeFile),
 	  EOL = '\n';
 
+const targetDir = process.argv[3] === undefined ? process.cwd(): path.resolve(process.argv[3]);
 
 if(!process.argv[2]){
 	console.log('no file given');
@@ -13,16 +14,26 @@ if(!process.argv[2]){
 }else{
 
 	let filePath = path.resolve(process.argv[2]),
-		extname = path.extname(filePath),
-		fileName = path.basename(filePath, extname);
+		extName = path.extname(filePath),
+		fileName = path.basename(filePath, extName);
 
 	readFile(filePath, 'utf8')
 	.then((data)=>{
-		let mode = extname === '.hexer' ? 'unhex' : 'hex',
-		lines = data.split(/\r\n|\n/);
-		lines.map(function(line){
-			process.stdout.write(Buffer.from(line).toString('hex') + EOL);		
-		});
+		let mode = extName === '.hexer' ? 'unhex' : 'hex',
+		lines = data.split(/\r\n|\n/),
+		text = lines.map(function(line){
+			if(mode === 'hex'){
+				return Buffer.from(line, 'utf8').toString('hex') + EOL;
+			}
+			return Buffer.from(line, 'hex').toString('utf8') + EOL;
+		}).join('');
+		let ext = mode === 'unhex' ? '' : extName + '.hexer';
+		return writeFile(path.join(targetDir, fileName + ext), text );
+	})
+	.then(()=>{
+	    console.log('done');
+	})
+	.catch((e)=>{
+		console.log(e.message);
 	});
-
 }
