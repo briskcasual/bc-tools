@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin":{
-    "bc-hexer": "./bin/hexer/index.js"
+    "bc-hexer": "./bin/hexer/index.js",
+    "bc-init": "./bin/init/index.js"
   },
   "repository": {
     "type": "git",
