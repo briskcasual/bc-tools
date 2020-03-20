@@ -5,13 +5,14 @@ const fs = require('fs'),
 	  promsify = require('util').promisify,
 	  readFile = promsify(fs.readFile),
 	  writeFile = promsify(fs.writeFile),
+    log = require('../../lib/log/index.js')({modName: 'hexer' }),
 	  EOL = '\n';
 
 const targetDir = process.argv[3] === undefined ? process.cwd(): path.resolve(process.argv[3]);
 
 if(!process.argv[2]){
-	console.log('no file given');
-	console.log('use example: $ bc-hexer foo.md hex');
+	log('no file given', 'error');
+	log('use example: $ bc-hexer foo.md hex', 'error');
 }else{
 
 	let filePath = path.resolve(process.argv[2]),
@@ -32,9 +33,9 @@ if(!process.argv[2]){
 		return writeFile(path.join(targetDir, fileName + ext), text );
 	})
 	.then(()=>{
-	    console.log('done');
+	    log('done', 'success');
 	})
 	.catch((e)=>{
-		console.log(e.message);
+            log(e, 'error');
 	});
 }
