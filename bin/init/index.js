@@ -2,7 +2,7 @@
 
 let copyDir = require('../../lib/copydir/index.js').copyDir,
 path = require('path'),
-log = require('../../lib/log/index.js');
+log = require('../../lib/log/index.js')({modName: 'init'})
 
 
 let source = path.join(__dirname, 'site-start'),
